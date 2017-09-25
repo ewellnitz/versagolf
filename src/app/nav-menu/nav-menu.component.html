@@ -16,12 +16,12 @@
           <a class="nav-link disabled" href="#">Statistics</a>
         </li>
         <li *ngIf="!isOnline()" class="nav-item">
-            <a class="nav-link" (click)="login()">Sign In</a>
+            <a class="nav-link" (click)="signIn()">Sign In</a>
           </li>
         <li *ngIf="isOnline()" class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Eric Wellnitz</a>
+          <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ userName }}</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" (click)="logout()">Sign Out</a>
+            <a class="dropdown-item" (click)="signOut()">Sign Out</a>
           </div>
         </li>
       </ul>

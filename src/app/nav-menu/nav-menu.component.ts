@@ -9,24 +9,25 @@ import { AuthService } from '../auth.service';
 })
 export class NavMenuComponent implements OnInit {
 
-  private isOnlineValue = false;
+  public userName = '';
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
-  login(): void {
-    this.authService.login();
-    this.isOnlineValue = true;
+  signIn(): void {
+    this.authService.signIn();
+    this.userName = this.authService.getUserName();
   }
 
-  logout(): void {
-    this.authService.logout();
-    this.isOnlineValue = false;
+  signOut(): void {
+    this.authService.signOut();
+    this.userName = '';
   }
 
   isOnline(): boolean {
-    return this.isOnlineValue;
+    this.userName = this.authService.getUserName();
+    return this.authService.isSignedIn();
   }
 
 }
