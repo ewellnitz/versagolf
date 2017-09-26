@@ -1,11 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
+import { AppRoutingModule } from './app-routing.moudle';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { AuthService } from './auth.service';
+import { CoursesModule } from './courses/courses.module';
 
 @NgModule({
   declarations: [
@@ -15,13 +18,10 @@ import { AuthService } from './auth.service';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
-      // { path: 'counter', component: CounterComponent },
-      // { path: 'fetch-data', component: FetchDataComponent },
-      { path: '**', redirectTo: 'home' }
-    ])
+    FormsModule,
+    HttpModule,
+    CoursesModule,
+    AppRoutingModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
