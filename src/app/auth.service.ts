@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
-import { UserAgentApplication } from 'msalx';
+import '../../node_modules/msal/out/msal';
+/// <reference path="../../node_modules/msal/out/msal.d.ts" />
 
 @Injectable()
 export class AuthService {
 
   constructor() {
     const authority = `https://login.microsoftonline.com/tfp/${this.tenantConfig.tenant}/${this.tenantConfig.signUpSignInPolicy}`;
-    this.userAgentApplication = new UserAgentApplication(this.tenantConfig.clientID, authority,
+    this.userAgentApplication = new Msal.UserAgentApplication(this.tenantConfig.clientID, authority,
       function (errorDesc: any, token: any, error: any, tokenType: any) {
         // Called after loginRedirect or acquireTokenPopup
       });
   }
 
-  private userAgentApplication: UserAgentApplication;
+  private userAgentApplication: any;
   private accessToken = '';
 
   tenantConfig = {
