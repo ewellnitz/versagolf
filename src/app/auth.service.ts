@@ -13,7 +13,7 @@ export class AuthService {
   }
 
   private userAgentApplication: UserAgentApplication;
-  private accessToken: string;
+  private accessToken = '';
 
   tenantConfig = {
     tenant: 'platinumsoft.onmicrosoft.com',
@@ -22,28 +22,35 @@ export class AuthService {
     b2cScopes: ['https://platinumsoft.onmicrosoft.com/versagolfapi/versagolf.read']
   };
 
-  signIn(): void {
-    console.log('signIn');
+  signIn() {
     const _this = this;
-    this.userAgentApplication.loginPopup(this.tenantConfig.b2cScopes).then(function (idToken: any) {
-      _this.userAgentApplication.acquireTokenSilent(_this.tenantConfig.b2cScopes).then(
-        function (accessToken: any) {
-          _this.accessToken = accessToken;
-        },
-        function (error: any) {
-          _this.userAgentApplication.acquireTokenPopup(_this.tenantConfig.b2cScopes).then(
-            function (accessToken: any) {
-              _this.accessToken = accessToken;
-            },
-            function (error1: any) {
-              console.error('Error acquiring the popup:\n${error1}');
-              // bootbox.alert(`Error acquiring the popup:\n${error}`);
-            });
+    this.userAgentApplication.loginPopup(this.tenantConfig.b2cScopes).then(function (idToken) {
+      // Login Success
+      _this.userAgentApplication.acquireTokenSilent(_this.tenantConfig.b2cScopes).then(function (accessToken) {
+        // AcquireToken Success
+        // updateUI();
+      }, function (error) {
+        // AcquireToken Failure, send an interactive request.
+        _this.userAgentApplication.acquireTokenPopup(_this.tenantConfig.b2cScopes).then(function (accessToken) {
+          // updateUI();
+        }, function (error2) {
+          console.log(error2);
         });
-    },
-      function (error: any) {
-        console.error('Error during login:\n${error}');
       });
+    }, function (error) {
+      console.log(error);
+    });
+    // return this.userAgentApplication.loginPopup(this.tenantConfig.b2cScopes)
+    //   .then(idToken => {
+    //     const user = this.userAgentApplication.getUser();
+    //     if (user) {
+    //       return user;
+    //     } else {
+    //       return null;
+    //     }
+    //   }, () => {
+    //     return null;
+    //   });
   }
 
   signOut(): void {
@@ -52,6 +59,23 @@ export class AuthService {
 
   isSignedIn(): boolean {
     return this.userAgentApplication.getUser() != null;
+  }
+
+  getToken() {
+    return this.userAgentApplication.acquireTokenSilent(this.tenantConfig.b2cScopes)
+      .then(accessToken => {
+        return accessToken;
+      }, error => {
+        return this.userAgentApplication.acquireTokenPopup(this.tenantConfig.b2cScopes)
+          .then(accessToken => {
+            return accessToken;
+          }, err => {
+            console.error(err);
+          });
+      });
+
+
+    // return this.accessToken;
   }
 
   getUserName(): any {
