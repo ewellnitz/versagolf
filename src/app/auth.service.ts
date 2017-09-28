@@ -6,23 +6,12 @@ import '../../node_modules/msal/out/msal';
 export class AuthService {
 
   constructor() {
-<<<<<<< HEAD
-    const authority = `https://login.microsoftonline.com/tfp/${this.tenantConfig.tenant}/${this.tenantConfig.signUpSignInPolicy}`;
-    this.userAgentApplication = new Msal.UserAgentApplication(this.tenantConfig.clientID, authority,
-      function (errorDesc: any, token: any, error: any, tokenType: any) {
-        // Called after loginRedirect or acquireTokenPopup
-      });
-  }
-
-  private userAgentApplication: any;
-=======
     console.log('auth service ctor');
     // this.userAgentApplication = new UserAgentApplication(this.tenantConfig.clientID, authority,
     //   function (errorDesc: any, token: any, error: any, tokenType: any) {
     //     // Called after loginRedirect or acquireTokenPopup
     //   });
   }
->>>>>>> 671a1fe9a470d1c55390c3a0ffe3e578919e1752
   private accessToken = '';
 
   tenantConfig = {
