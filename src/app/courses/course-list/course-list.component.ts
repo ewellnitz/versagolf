@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseService } from '../course.service';
 import { Course } from '../../models/course';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-course-list',
@@ -9,13 +10,15 @@ import { Course } from '../../models/course';
 })
 export class CourseListComponent implements OnInit {
 
-  constructor(private courseService: CourseService) { }
+  constructor(private courseService: CourseService, private authSerivce: AuthService) { }
   errorMessage: string;
   courses: Course[];
   ngOnInit() {
   }
 
   getCourses() {
+    console.log(this.authSerivce.getToken());
+
     const retVal = this.courseService.getCourses().subscribe(
       courses => {
         console.log(courses);

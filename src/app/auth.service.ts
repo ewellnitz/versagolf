@@ -5,14 +5,12 @@ import { UserAgentApplication } from 'msalx';
 export class AuthService {
 
   constructor() {
-    const authority = `https://login.microsoftonline.com/tfp/${this.tenantConfig.tenant}/${this.tenantConfig.signUpSignInPolicy}`;
-    this.userAgentApplication = new UserAgentApplication(this.tenantConfig.clientID, authority,
-      function (errorDesc: any, token: any, error: any, tokenType: any) {
-        // Called after loginRedirect or acquireTokenPopup
-      });
+    console.log('auth service ctor');
+    // this.userAgentApplication = new UserAgentApplication(this.tenantConfig.clientID, authority,
+    //   function (errorDesc: any, token: any, error: any, tokenType: any) {
+    //     // Called after loginRedirect or acquireTokenPopup
+    //   });
   }
-
-  private userAgentApplication: UserAgentApplication;
   private accessToken = '';
 
   tenantConfig = {
@@ -21,36 +19,32 @@ export class AuthService {
     signUpSignInPolicy: 'B2C_1_sign_up_sign_in',
     b2cScopes: ['https://platinumsoft.onmicrosoft.com/versagolfapi/versagolf.read']
   };
+  private authority = `https://login.microsoftonline.com/tfp/${this.tenantConfig.tenant}/${this.tenantConfig.signUpSignInPolicy}`;
+  private userAgentApplication = new UserAgentApplication(this.tenantConfig.clientID, this.authority,
+    function (errorDesc: any, token: any, error: any, tokenType: any) {
+      // Called after loginRedirect or acquireTokenPopup
+    });
 
   signIn() {
-    const _this = this;
-    this.userAgentApplication.loginPopup(this.tenantConfig.b2cScopes).then(function (idToken) {
-      // Login Success
-      _this.userAgentApplication.acquireTokenSilent(_this.tenantConfig.b2cScopes).then(function (accessToken) {
-        // AcquireToken Success
-        // updateUI();
-      }, function (error) {
-        // AcquireToken Failure, send an interactive request.
-        _this.userAgentApplication.acquireTokenPopup(_this.tenantConfig.b2cScopes).then(function (accessToken) {
-          // updateUI();
+    this.userAgentApplication.loginPopup(this.tenantConfig.b2cScopes).then(idToken => {
+      console.log(this);
+      console.log(idToken);
+      this.userAgentApplication.acquireTokenSilent(this.tenantConfig.b2cScopes).then(token1 => {
+        console.log(this);
+        this.accessToken = token1;
+        console.log(this);
+        console.log(token1);
+      }, error => {
+        console.error(error);
+        this.userAgentApplication.acquireTokenPopup(this.tenantConfig.b2cScopes).then(token2 => {
+          console.log(token2);
         }, function (error2) {
-          console.log(error2);
+          console.error(error2);
         });
       });
-    }, function (error) {
-      console.log(error);
+    }, error => {
+      console.error(error);
     });
-    // return this.userAgentApplication.loginPopup(this.tenantConfig.b2cScopes)
-    //   .then(idToken => {
-    //     const user = this.userAgentApplication.getUser();
-    //     if (user) {
-    //       return user;
-    //     } else {
-    //       return null;
-    //     }
-    //   }, () => {
-    //     return null;
-    //   });
   }
 
   signOut(): void {
@@ -62,17 +56,31 @@ export class AuthService {
   }
 
   getToken() {
-    return this.userAgentApplication.acquireTokenSilent(this.tenantConfig.b2cScopes)
-      .then(accessToken => {
-        return accessToken;
-      }, error => {
-        return this.userAgentApplication.acquireTokenPopup(this.tenantConfig.b2cScopes)
-          .then(accessToken => {
-            return accessToken;
-          }, err => {
-            console.error(err);
-          });
-      });
+    return this.accessToken;
+    // return this.userAgentApplication.acquireTokenSilent(this.tenantConfig.b2cScopes).then(accessToken => {
+    //   console.log(accessToken);
+    //   return accessToken;
+    // }, error => {
+    //   this.userAgentApplication.acquireTokenPopup(this.tenantConfig.b2cScopes).then(accessToken => {
+    //     console.log(accessToken);
+    //     return accessToken;
+    //   }, error2 => {
+    //     console.error(error2);
+    //   });
+    // });
+
+
+    // return this.userAgentApplication.acquireTokenSilent(this.tenantConfig.b2cScopes)
+    //   .then(accessToken => {
+    //     return accessToken;
+    //   }, error => {
+    //     return this.userAgentApplication.acquireTokenPopup(this.tenantConfig.b2cScopes)
+    //       .then(accessToken => {
+    //         return accessToken;
+    //       }, err => {
+    //         console.error(err);
+    //       });
+    //   });
 
 
     // return this.accessToken;
