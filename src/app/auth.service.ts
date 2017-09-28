@@ -21,7 +21,7 @@ export class AuthService {
     b2cScopes: ['https://platinumsoft.onmicrosoft.com/versagolfapi/versagolf.read']
   };
   private authority = `https://login.microsoftonline.com/tfp/${this.tenantConfig.tenant}/${this.tenantConfig.signUpSignInPolicy}`;
-  private userAgentApplication = new UserAgentApplication(this.tenantConfig.clientID, this.authority,
+  private userAgentApplication = new Msal.UserAgentApplication(this.tenantConfig.clientID, this.authority,
     function (errorDesc: any, token: any, error: any, tokenType: any) {
       // Called after loginRedirect or acquireTokenPopup
     });
