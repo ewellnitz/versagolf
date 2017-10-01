@@ -31,7 +31,7 @@ export interface Hole {
 export interface HoleTee extends GeoLocation {
     id: number;
     holeId: number;
-    teeTypeId: TeeType;
+    teeTypeId: string;
     length: number;
     latitude: number;
     longitude: number;

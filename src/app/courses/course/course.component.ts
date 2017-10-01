@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from '../course.service';
 import { Course } from '../../models/course';
+import { TeeType } from '../../models/course';
 
 @Component({
   selector: 'app-course',
@@ -9,7 +10,7 @@ import { Course } from '../../models/course';
   styleUrls: ['./course.component.css']
 })
 export class CourseComponent implements OnInit {
-  teeTypes: Array<TeeType> = [];
+  teeTypes: Array<TeeTypeData> = [];
   course: Course = <Course>{};
   private id: any;
   constructor(private route: ActivatedRoute,
@@ -61,7 +62,7 @@ export class CourseComponent implements OnInit {
       // select tee types based on existing holes
       this.teeTypes.forEach((teeType) => {
         // find the hole tee for this hole
-        const value = hole.holeTees.find(holeTee => holeTee.teeTypeId === teeType.id);
+        const value = hole.holeTees.find(holeTee => holeTee.teeTypeId === teeType.name);
         if (value !== undefined) {
           teeType.selected = true;
         }
@@ -78,7 +79,7 @@ export class CourseComponent implements OnInit {
     this.course.holes.forEach((hole) => {
 
       // find the holeTee associcated with the selected id
-      const value = hole.holeTees.find(holeTee => holeTee.teeTypeId === teeType.id);
+      const value = hole.holeTees.find(holeTee => holeTee.teeTypeId === teeType.name);
 
       // if the tee type is not selected, remove the holeTee
       if (!teeType.selected) {
@@ -91,7 +92,7 @@ export class CourseComponent implements OnInit {
         hole.holeTees.push({
           holeId: hole.id,
           id: -1,
-          teeTypeId: teeType.id,
+          teeTypeId: teeType.name,
           length: 300,
           latitude: this.course.latitude,
           longitude: this.course.longitude
@@ -102,7 +103,7 @@ export class CourseComponent implements OnInit {
   }
 }
 
-class TeeType {
+class TeeTypeData {
   public id: number;
   public name: string;
   public selected: boolean;

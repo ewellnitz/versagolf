@@ -14,10 +14,10 @@ export class CourseListComponent implements OnInit {
   errorMessage: string;
   courses: Course[] = [];
   ngOnInit() {
+    this.getCourses();
   }
 
   getCourses() {
-    console.log(this.authSerivce.getToken());
     this.courses = [];
     const retVal = this.courseService.getCourses().subscribe(
       courses => {
