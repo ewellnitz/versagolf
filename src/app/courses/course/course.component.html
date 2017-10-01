@@ -1,21 +1,21 @@
 <h1>{{course.name}}</h1>
-
+<!-- <agm-map [latitude]="51.673858" [longitude]="7.815982"></agm-map> -->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
-    <a class="nav-link active" id="detail-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-expanded="true">Details</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="tees-tab" data-toggle="tab" href="#tees" role="tab" aria-controls="profile">Tees</a>
+    <a class="nav-link" id="detail-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-expanded="true">Details</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" id="holes-tab" data-toggle="tab" href="#holes" role="tab" aria-controls="profile">Holes</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link active" id="map-tab" data-toggle="tab" href="#map" role="tab" aria-controls="profile">Map</a>
+  </li>
 </ul>
 <div class="tab-content" id="myTabContent">
   <!-- Details -->
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="detail-tab">
+  <div class="tab-pane" id="home" role="tabpanel" aria-labelledby="detail-tab">
     <h3>General</h3>
-  
+
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" [(ngModel)]="course.name" />
@@ -49,23 +49,14 @@
     <h3>Tees</h3>
     <div>Select the tees available for this course:</div>
     <div *ngFor="let teeType of teeTypes" class="form-check form-check-inline">
-        <label class="form-check-label">
+      <label class="form-check-label">
             <input type="checkbox" class="form-check-input" id="teeType" [(ngModel)]="teeType.selected" (ngModelChange)="onTeeTypeChange(teeType)" /> {{teeType.name}}
           </label>
-      </div>
-  </div>
-
-  <!-- Tees -->
-  <div class="tab-pane fade" id="tees" role="tabpanel" aria-labelledby="profile-tab">
-    <!-- <div *ngFor="let teeType of teeTypes" class="form-check form-check-inline">
-      <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" id="teeType" [(ngModel)]="teeType.selected" (ngModelChange)="onTeeTypeChange(teeType)" /> {{teeType.name}}
-        </label>
-    </div> -->
+    </div>
   </div>
 
   <!-- Holes  -->
-  <div class="tab-pane fade" id="holes" role="tabpanel" aria-labelledby="profile-tab">
+  <div class="tab-pane" id="holes" role="tabpanel" aria-labelledby="holes-tab">
     <div class="card-columns">
       <div *ngFor="let hole of course.holes" class="card border-success">
         <div class="card-body">
@@ -104,5 +95,11 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Map -->
+  <div class="tab-pane show active" id="map" role="tabpanel" aria-labelledby="map-tab">
+    Test
+      <agm-map [latitude]="51.673858" [longitude]="7.815982"></agm-map>
   </div>
 </div>
