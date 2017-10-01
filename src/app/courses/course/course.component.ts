@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from '../course.service';
 import { Course } from '../../models/course';
@@ -9,9 +9,8 @@ import { Course } from '../../models/course';
   styleUrls: ['./course.component.css']
 })
 export class CourseComponent implements OnInit {
-
+  course: Course = <Course>{};
   private id: any;
-  private course: Course;
   constructor(private route: ActivatedRoute,
     private router: Router, private courseService: CourseService) { }
 

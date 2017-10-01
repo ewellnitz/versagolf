@@ -1,1 +1,31 @@
-<h1>{{course.name}}</h1>
+<!-- <h1>{{course.name}}</h1> -->
+<!-- <form> -->
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" [(ngModel)]="course.name"/>
+  </div>
+  <div class="form-group">
+    <label for="phone">Phone</label>
+    <input type="tel" class="form-control" id="name" [(ngModel)]="course.phone"/>
+  </div>
+  <div class="form-group">
+    <label for="addressLine1">Line 1</label>
+    <input type="text" class="form-control" id="name" [(ngModel)]="course.addressLine1"/>
+  </div>
+  <div class="form-group">
+    <label for="addressLine2">Line 2</label>
+    <input type="text" class="form-control" id="addressLine2" [(ngModel)]="course.addressLine2"/>
+  </div>
+  <div class="form-group">
+    <label for="city">City</label>
+    <input type="text" class="form-control" id="city" [(ngModel)]="course.city"/>
+  </div>
+  <div class="form-group">
+    <label for="stateProvince">State/Province</label>
+    <input type="text" class="form-control" id="stateProvince" [(ngModel)]="course.stateProvinceId"/>
+  </div>
+  <div class="form-group">
+    <label for="postalCode">Potal Code</label>
+    <input type="text" class="form-control" id="postalCode" [(ngModel)]="course.postalCode"/>
+  </div>
+<!-- </form> -->

@@ -6,10 +6,12 @@ import { CoursesComponent } from './courses.component';
 import { CourseListComponent } from './course-list/course-list.component';
 import { CourseComponent } from './course/course.component';
 import { CourseService } from './course.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     CoursesRoutingModule
   ],
   declarations: [CoursesComponent, CourseListComponent, CourseComponent],
