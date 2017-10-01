@@ -51,7 +51,7 @@ export class AuthService {
   }
 
   getToken() {
-    return localStorage.getItem('access_token')
+    return localStorage.getItem('access_token');
     // return this.accessToken;
     // return this.userAgentApplication.acquireTokenSilent(this.tenantConfig.b2cScopes).then(accessToken => {
     //   console.log(accessToken);
