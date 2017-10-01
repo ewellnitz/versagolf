@@ -48,7 +48,10 @@
 
   <!-- Tees -->
   <div class="tab-pane fade" id="tees" role="tabpanel" aria-labelledby="profile-tab">
-    Tees
+      <div *ngFor="let teeType of teeTypes" class="form-group">
+          <label for="teeType">{{teeType.name}}</label>
+          <input type="checkbox" class="form-control" id="teeType" [(ngModel)]="teeType.selected" />
+        </div>
   </div>
 
   <!-- Holes  -->
