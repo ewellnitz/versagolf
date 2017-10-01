@@ -1,7 +1,14 @@
-  course-list works!
-  <button (click) = "getCourses()">Get Courses</button>
-  <ul>
-    <li *ngFor="let course of courses">
-      {{course.name}}!!
-    </li>
-  </ul>
+<div class="container-fluid">
+  <button (click)="getCourses()">Get Courses</button>
+  <div class="card-columns">
+    <div *ngFor="let course of courses" class="card">
+      <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+      <div class="card-body">
+        <h4 class="card-title">{{course.name}}</h4>
+        <p class="card-text">{{course.phone}}</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        <a href="courses/{{course.id}}" class="btn btn-primary">Open</a>
+      </div>
+    </div>
+  </div>
+</div>

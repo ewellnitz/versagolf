@@ -22,7 +22,6 @@ export class CourseListComponent implements OnInit {
     const retVal = this.courseService.getCourses().subscribe(
       courses => {
         this.courses = courses;
-        console.log(courses);
       },
       error => {
         console.error(error);
