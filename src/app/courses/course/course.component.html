@@ -1,31 +1,95 @@
-<!-- <h1>{{course.name}}</h1> -->
-<!-- <form> -->
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" [(ngModel)]="course.name"/>
+<h1>{{course.name}}</h1>
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="detail-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-expanded="true">Details</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="tees-tab" data-toggle="tab" href="#tees" role="tab" aria-controls="profile">Tees</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="holes-tab" data-toggle="tab" href="#holes" role="tab" aria-controls="profile">Holes</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <!-- Details -->
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="detail-tab">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="course.name" />
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input type="tel" class="form-control" id="name" [(ngModel)]="course.phone" />
+    </div>
+    <div class="form-group">
+      <label for="addressLine1">Address Line 1</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="course.addressLine1" />
+    </div>
+    <div class="form-group">
+      <label for="addressLine2">Address Line 2</label>
+      <input type="text" class="form-control" id="addressLine2" [(ngModel)]="course.addressLine2" />
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="city">City</label>
+        <input type="text" class="form-control" id="city" [(ngModel)]="course.city" />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="stateProvince">State/Province</label>
+        <input type="text" class="form-control" id="stateProvince" [(ngModel)]="course.stateProvinceId" />
+      </div>
+      <div class="form-group col-md-2">
+        <label for="postalCode">Potal Code</label>
+        <input type="text" class="form-control" id="postalCode" [(ngModel)]="course.postalCode" />
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="phone">Phone</label>
-    <input type="tel" class="form-control" id="name" [(ngModel)]="course.phone"/>
+
+  <!-- Tees -->
+  <div class="tab-pane fade" id="tees" role="tabpanel" aria-labelledby="profile-tab">
+    Tees
   </div>
-  <div class="form-group">
-    <label for="addressLine1">Line 1</label>
-    <input type="text" class="form-control" id="name" [(ngModel)]="course.addressLine1"/>
+
+  <!-- Holes  -->
+  <div class="tab-pane fade" id="holes" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="card-columns">
+      <div *ngFor="let hole of course.holes" class="card border-success">
+        <div class="card-body">
+          <h4 class="card-title">Hole #{{hole.number}}</h4>
+
+          <!-- men's -->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="mensPar">Men's Par</label>
+              <input type="number" class="form-control" id="mensPar" [(ngModel)]="hole.mensPar" min="1" max="7" />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="mensHandicap">Men's Handicap</label>
+              <input type="number" class="form-control" id="mensHandicap" [(ngModel)]="hole.mensHandicap" min="1" max="18" />
+            </div>
+          </div>
+
+          <!-- women's -->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="womensPar">Women's Par</label>
+              <input type="number" class="form-control" id="womensPar" [(ngModel)]="hole.womensPar" min="1" max="7" />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="womensHandicap">Women's Handicap</label>
+              <input type="number" class="form-control" id="womensHandicap" [(ngModel)]="hole.womensHandicap" min="1" max="18" />
+            </div>
+
+
+          </div>
+          <!-- tees -->
+          <div *ngFor="let holeTee of hole.holeTees" class="form-group">
+            <label for="length">{{holeTee.teeTypeId}} Distance</label>
+            <input type="number" class="form-control" id="length" [(ngModel)]="holeTee.length" min="1" max="2000" />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="addressLine2">Line 2</label>
-    <input type="text" class="form-control" id="addressLine2" [(ngModel)]="course.addressLine2"/>
-  </div>
-  <div class="form-group">
-    <label for="city">City</label>
-    <input type="text" class="form-control" id="city" [(ngModel)]="course.city"/>
-  </div>
-  <div class="form-group">
-    <label for="stateProvince">State/Province</label>
-    <input type="text" class="form-control" id="stateProvince" [(ngModel)]="course.stateProvinceId"/>
-  </div>
-  <div class="form-group">
-    <label for="postalCode">Potal Code</label>
-    <input type="text" class="form-control" id="postalCode" [(ngModel)]="course.postalCode"/>
-  </div>
-<!-- </form> -->
+</div>
