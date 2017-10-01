@@ -28,17 +28,11 @@ export class AuthService {
 
   signIn() {
     this.userAgentApplication.loginPopup(this.tenantConfig.b2cScopes).then(idToken => {
-      console.log(this);
-      console.log(idToken);
       this.userAgentApplication.acquireTokenSilent(this.tenantConfig.b2cScopes).then(token1 => {
-        console.log(this);
-        this.accessToken = token1;
-        console.log(this);
-        console.log(token1);
+        localStorage.setItem('access_token', token1);
       }, error => {
         console.error(error);
         this.userAgentApplication.acquireTokenPopup(this.tenantConfig.b2cScopes).then(token2 => {
-          console.log(token2);
         }, function (error2) {
           console.error(error2);
         });
@@ -57,7 +51,8 @@ export class AuthService {
   }
 
   getToken() {
-    return this.accessToken;
+    return localStorage.getItem('access_token')
+    // return this.accessToken;
     // return this.userAgentApplication.acquireTokenSilent(this.tenantConfig.b2cScopes).then(accessToken => {
     //   console.log(accessToken);
     //   return accessToken;

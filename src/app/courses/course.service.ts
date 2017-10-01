@@ -10,7 +10,7 @@ import 'rxjs/add/operator/catch';
 export class CourseService {
 
   constructor(private http: HttpClient) { }
-  getCourses(): Observable<object> {
+  getCourses(): Observable<Course[]> {
 
     const url = 'http://versagolf-api.azurewebsites.net/api/courses/search?courseName=a';
 
@@ -20,7 +20,7 @@ export class CourseService {
     //   .do(data => console.log(data))
     //   .catch(this.handleError);
 
-    return this.http.get(url);
+    return this.http.get<Course[]>(url);
   }
 
   private handleError(error: Response) {

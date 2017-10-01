@@ -12,18 +12,22 @@ export class CourseListComponent implements OnInit {
 
   constructor(private courseService: CourseService, private authSerivce: AuthService) { }
   errorMessage: string;
-  courses: Course[];
+  courses: Course[] = [];
   ngOnInit() {
   }
 
   getCourses() {
     console.log(this.authSerivce.getToken());
-
+    this.courses = [];
     const retVal = this.courseService.getCourses().subscribe(
       courses => {
+        this.courses = courses;
         console.log(courses);
       },
-      error => this.errorMessage = <any>error
+      error => {
+        console.error(error);
+        this.errorMessage = <any>error;
+      }
     );
   }
 }
