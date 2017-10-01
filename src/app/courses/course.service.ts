@@ -13,15 +13,13 @@ export class CourseService {
   getCourses(): Observable<Course[]> {
 
     const url = 'http://versagolf-api.azurewebsites.net/api/courses/search?courseName=a';
-
-    // return this.http
-    //   .get(url)
-    //   .map((response: Response) => <Course[]>response.json())
-    //   .do(data => console.log(data))
-    //   .catch(this.handleError);
-
     return this.http.get<Course[]>(url);
   }
+
+  getCourse(id: number): Observable<Course> {
+        const url = `http://versagolf-api.azurewebsites.net/api/courses/${id}`;
+        return this.http.get<Course>(url);
+      }
 
   private handleError(error: Response) {
     console.error(error);
